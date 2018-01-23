@@ -16,15 +16,19 @@ def main(bot, trigger):
 	
 	# Splitter
 	chatInput = botTrigger.lower()
-	chatInputList = chatInput.split()
-	print(str(chatInputList)) 
-	for x in chatInputList:
-		if(x == "happy"):
-			happyCounter += 1
-		if(x == "sad"):
-			sadCounter += 1
-	print("Happy Counter = " + str(happyCounter))
-	print("Sad Counter = " + str(sadCounter))
+	print(emo.detect_emotion_in_raw_np(chatInput))
+	bot.say(str(emo.detect_emotion_in_raw_np(chatInput)))
+	
+
+	#chatInputList = chatInput.split()
+	#print(str(chatInputList)) 
+	#for x in chatInputList:
+	#	if(x == "happy"):
+	#		happyCounter += 1
+	#	if(x == "sad"):
+	#		sadCounter += 1
+	#print("Happy Counter = " + str(happyCounter))
+	#print("Sad Counter = " + str(sadCounter))
 			
     #bot.say('Hi, ' + trigger.nick)
 
