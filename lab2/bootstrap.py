@@ -29,6 +29,7 @@ def boostrap(statistic_func, iterations, data):
 
 if __name__ == "__main__":
 	df = pd.read_csv('./salaries.csv')
+	#df = pd.read_csv('./vehicles.csv')
 	#print df.columns
 	
 	data = df.values.T[1]
