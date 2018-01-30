@@ -14,7 +14,7 @@ import numpy as np
 def boostrap(statistic_func, iterations, data):
 	samples  = np.random.choice(data,replace = True, size = [iterations, len(data)])
 	#print samples.shape
-	data_mean = data.mean()
+	data_mean = statistic_func(data)
 	vals = []
 	for sample in samples:
 		sta = statistic_func(sample)
@@ -28,14 +28,15 @@ def boostrap(statistic_func, iterations, data):
 
 
 if __name__ == "__main__":
-	df = pd.read_csv('./salaries.csv')
-	#df = pd.read_csv('./vehicles.csv')
+	#df = pd.read_csv('./salaries.csv')
+	df = pd.read_csv('./vehicles.csv')
+	df.dropna(how = 'any', inplace = True)
 	#print df.columns
 	
 	data = df.values.T[1]
 	boots = []
-	for i in range(100,100000,1000):
-		boot = boostrap(np.mean, i, data)
+	for i in range(100,1000,10):
+		boot = boostrap(np.std, i, data)
 		boots.append([i,boot[0], "mean"])
 		boots.append([i,boot[1], "lower"])
 		boots.append([i,boot[2], "upper"])

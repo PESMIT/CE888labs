@@ -49,10 +49,10 @@ if __name__ == "__main__":
 	print((newDFProposed))
 
 	# Add incrementing columns to new datafiles.
-	newDFCurrent.reset_index()
-	newDFCurrent.columns[0] = 'Car Number'
-	newDFCurrent['Car Number'] = newDFCurrent.index + 1
+	newDFCurrent.insert(0, 'Car_Number', range(0, 0+len(newDFCurrent)))
 	print((newDFCurrent))
+	newDFProposed.insert(0, 'Car_Number', range(0, 0+len(newDFProposed)))
+	print((newDFProposed))
 
 	# Begin SNS Plotting
 	# OG DATA PLOT
@@ -62,6 +62,7 @@ if __name__ == "__main__":
 	sns_plot.savefig("scaterplot.png",bbox_inches='tight')
 	sns_plot.savefig("scaterplot.pdf",bbox_inches='tight')
 	data = df.values.T[1]
+	print(("\nORIGINAL VEHICLE FLEET DATA"))
 	print((("Mean: %f")%(np.mean(data))))
 	print((("Median: %f")%(np.median(data))))
 	print((("Var: %f")%(np.var(data))))
@@ -70,18 +71,19 @@ if __name__ == "__main__":
 	plt.clf()
 	sns_plot2 = sns.distplot(data, bins=20, kde=False, rug=True).get_figure()
 	axes = plt.gca()
-	axes.set_xlabel('MPG of Current Fleet') 
-	axes.set_ylabel('MPG of Proposed Fleet')
+	axes.set_xlabel('MPG of Current Car') 
+	axes.set_ylabel('MPG of Proposed Car')
 	sns_plot2.savefig("histogram.png",bbox_inches='tight')
 	sns_plot2.savefig("histogram.pdf",bbox_inches='tight')
 
 	# CURRENT VEHICLES DATA PLOT
-	sns_plot = sns.lmplot(newDFCurrent.columns[0], data=newDFCurrent, fit_reg=False)
+	sns_plot = sns.lmplot(newDFCurrent.columns[0], newDFCurrent.columns[1], data=newDFCurrent, fit_reg=False)
 	sns_plot.axes[0,0].set_ylim(0,)
 	sns_plot.axes[0,0].set_xlim(0,)
 	sns_plot.savefig("scaterplotCurr.png",bbox_inches='tight')
 	sns_plot.savefig("scaterplotCurr.pdf",bbox_inches='tight')
 	data = newDFCurrent.values.T[1]
+	print(("\nCURRENT VEHICLE FLEET DATA"))
 	print((("Mean: %f")%(np.mean(data))))
 	print((("Median: %f")%(np.median(data))))
 	print((("Var: %f")%(np.var(data))))
@@ -102,6 +104,7 @@ if __name__ == "__main__":
 	sns_plot.savefig("scaterplotPro.png",bbox_inches='tight')
 	sns_plot.savefig("scaterplotPro.pdf",bbox_inches='tight')
 	data = newDFProposed.values.T[1]
+	print(("\nPROPOSED VEHICLE FLEET DATA"))
 	print((("Mean: %f")%(np.mean(data))))
 	print((("Median: %f")%(np.median(data))))
 	print((("Var: %f")%(np.var(data))))
