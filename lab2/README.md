@@ -1,4 +1,3 @@
-<p align="center">
 	![logo](./scaterplot.png?raw=true)
 	ORIGINAL DATA
 
@@ -15,4 +14,3 @@
 	![logo](./ProBootstrap.png?raw=true)
 
 	As you can see, the proposed vehicle fleet has on average a higher rate of MPG.
-</p>
